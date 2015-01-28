@@ -27,6 +27,12 @@ include(dirname(__FILE__).'/mercadopago.php');
 		$mailVars, 
 		$currency->id
 	);
+					
+	$order 		= new Order($mercadopago->currentOrder);
+	$idCustomer = $order->id_customer;
+	$idLang		= $order->id_lang;
+	$customer 	= new Customer(intval($idCustomer));
+	$CusMail	= $customer->email;
 
 
 	Tools::redirectLink(__PS_BASE_URI__.'order-confirmation.php?id_cart='.$cart->id.'&id_module='.$mercadopago->id.'&id_order='.$mercadopago->currentOrder.'&key='.$order->secure_key);
